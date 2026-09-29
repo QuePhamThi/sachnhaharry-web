@@ -255,6 +255,7 @@ HEAD = '''<!doctype html>
 <meta property="og:description" content="Bài học mỗi ngày, bài viết và trắc nghiệm tâm lý miễn phí.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#000000">
+<meta name="google-site-verification" content="tjLgcrKgJOA55Y49VatD2VKD68bslHDwUwOkgyh_NpA" />
 <style>*,*::before,*::after{box-sizing:border-box}html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 '''
 i = app.index('</style>') + len('</style>')
