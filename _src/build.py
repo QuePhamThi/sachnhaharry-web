@@ -274,7 +274,13 @@ for d in DIRS:
     for a in ARTICLES:
         open(os.path.join(d, 'bai-viet', a['slug'] + '.html'), 'w', encoding='utf-8').write(article_page(a))
 
-# robots.txt cho bản web thật
-open(os.path.join(OUT, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\n')
+
+# sitemap.xml cho Google (tự cập nhật mỗi lần build)
+SITE = 'https://sachnhaharry.netlify.app'
+latest = max(a['date'] for a in ARTICLES)
+urls = [(SITE + '/', latest), (SITE + '/bai-viet/index.html', latest)] + [(SITE + '/bai-viet/' + a['slug'] + '.html', a['date']) for a in ARTICLES]
+sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'  <url><loc>{u}</loc><lastmod>{d}</lastmod></url>\n' for u, d in urls) + '</urlset>\n'
+open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8').write(sm)
+open(os.path.join(OUT, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\n\nSitemap: ' + SITE + '/sitemap.xml\n')
 for a in ARTICLES: print(a['slug'], words(a), 'từ,', read_min(a), 'phút')
 print('OK')
