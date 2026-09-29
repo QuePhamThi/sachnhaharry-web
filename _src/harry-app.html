@@ -1,0 +1,519 @@
+<title>Sách nhà Harry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&display=swap">
+<style>
+/* Layout: một cột kiểu ứng dụng điện thoại (tối đa 560px), sân khấu đen như video của kênh; người que trắng + điểm nhấn vàng */
+:root{
+  --bg:#000000;
+  --surface:#121110;
+  --surface-2:#1c1a17;
+  --line:#2e2b27;
+  --fg:#f2f0ec;
+  --muted:#a09a90;
+  --gold:#ffbd59;
+  --gold-soft:rgba(255,189,89,.14);
+  --gold-ink:#1b1204;
+  --warn:#ff9a6b;
+  --ok:#93d6a9;
+  --display:"Literata", Georgia, "Times New Roman", serif;
+  --body:"Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: dark;
+}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:var(--body);font-size:16px;line-height:1.6;padding-inline:16px;padding-block:0 56px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+a{color:var(--gold)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+
+/* Thanh trên */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:18px 4px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg)}
+.brand-mark{width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--gold-ink);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:18px}
+.brand-name{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px}
+.handle{font-size:13px;color:var(--muted);text-decoration:none}
+.handle:hover{color:var(--gold)}
+
+/* Mở đầu */
+.hero{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;padding-top:8px}
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,8vw,42px);line-height:1.15;margin:0;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{margin:10px 0 0;color:var(--muted);max-width:34ch}
+.hero .fig{width:86px;color:var(--fg)}
+
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.section-title{font-family:var(--display);font-size:24px;font-weight:700;margin:0 0 14px;line-height:1.25}
+
+/* Bài học hôm nay */
+.lesson{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 20px;display:flex;flex-direction:column;gap:14px}
+.lesson-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.streak{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--gold-soft);color:var(--gold);font-weight:600;font-variant-numeric:tabular-nums}
+.lesson h3{font-family:var(--display);font-size:24px;line-height:1.3;margin:0;text-wrap:balance}
+.lesson .body p{margin:0 0 12px;max-width:65ch}
+.lesson .body p:last-child{margin-bottom:0}
+.ask{border-left:3px solid var(--gold);padding:4px 0 4px 14px;font-style:italic;color:var(--fg)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);font-weight:600;text-decoration:none;color:var(--fg);transition:background .15s,border-color .15s}
+.btn:hover{border-color:var(--gold)}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.btn-gold:hover{background:#ffc873}
+.btn[aria-pressed="true"]{border-color:var(--ok);color:var(--ok)}
+.note{font-size:13px;color:var(--muted);margin:0}
+
+/* Danh sách bài test */
+.quizzes{display:grid;gap:14px}
+.qcard{display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:center;text-align:left;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;transition:border-color .15s,transform .15s}
+.qcard:hover{border-color:var(--gold);transform:translateY(-1px)}
+.qcard .fig{width:64px;color:var(--fg)}
+.qcard h3{font-family:var(--display);font-size:19px;line-height:1.3;margin:0 0 4px}
+.qcard span{font-size:13px;color:var(--muted)}
+.qcard .go{color:var(--gold);font-weight:600;font-size:14px;margin-top:6px;display:inline-block}
+
+/* Màn làm bài */
+.back{background:none;border:0;color:var(--muted);padding:6px 0;display:inline-flex;gap:6px;align-items:center;font-size:14px}
+.back:hover{color:var(--gold)}
+.progress{display:flex;flex-direction:column;gap:8px}
+.progress-top{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--gold);width:0;transition:width .25s}
+.question{font-family:var(--display);font-size:clamp(22px,6vw,28px);line-height:1.35;margin:4px 0 0;text-wrap:balance;min-height:3.2em}
+.options{display:grid;gap:10px}
+.opt{text-align:left;padding:16px 18px;border-radius:14px;border:1px solid var(--line);background:var(--surface);font-weight:500;transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--gold)}
+.opt[aria-checked="true"]{border-color:var(--gold);background:var(--gold-soft)}
+
+/* Thẻ kết quả */
+.card{background:var(--surface);border:1px solid var(--gold);border-radius:22px;padding:26px 22px 22px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.card-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.card-main{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
+.card-main .fig{width:74px;color:var(--fg)}
+.card .quizname{font-size:14px;color:var(--muted);margin:0}
+.card .tier{font-family:var(--display);font-size:clamp(26px,7vw,32px);font-weight:700;color:var(--gold);line-height:1.2;margin:4px 0 0;text-wrap:balance}
+.score{font-variant-numeric:tabular-nums;font-size:14px;color:var(--fg);margin-top:6px}
+.meter{height:8px;border-radius:8px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--gold)}
+.card p{margin:0;max-width:65ch}
+.card h4{margin:6px 0 0;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold)}
+.card ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.card-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--line);padding-top:12px;font-size:13px;color:var(--muted)}
+.card-foot b{color:var(--fg)}
+.care{background:var(--surface-2);border-radius:14px;padding:14px 16px;font-size:14px;color:var(--fg)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--gold);color:var(--gold-ink);padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px}
+
+footer{border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted)}
+footer .links{display:flex;gap:16px;flex-wrap:wrap}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#home" data-go="home" aria-label="Về trang chủ Sách nhà Harry">
+      <span class="brand-mark" aria-hidden="true">H</span>
+      <span class="brand-name">Sách nhà Harry</span>
+    </a>
+    <a class="handle" href="https://www.tiktok.com/@sachnhaharry" target="_blank" rel="noopener">@sachnhaharry</a>
+  </header>
+
+  <!-- TRANG CHỦ -->
+  <main id="view-home" class="wrap" style="gap:34px">
+    <section class="hero">
+      <div>
+        <h1>Hiểu mình hơn, <em>mỗi ngày 5 phút.</em></h1>
+        <p>Bài học ngắn mỗi ngày và những bài trắc nghiệm giúp bạn nhìn rõ bản thân và những người xung quanh.</p>
+      </div>
+      <div class="fig" data-fig="read" aria-hidden="true"></div>
+    </section>
+
+    <section aria-labelledby="lesson-h">
+      <p class="eyebrow">Bài học hôm nay</p>
+      <article class="lesson">
+        <div class="lesson-meta">
+          <span id="lesson-date"></span>
+          <span class="streak" id="streak">Chuỗi 0 ngày</span>
+        </div>
+        <h3 id="lesson-h"></h3>
+        <div class="body" id="lesson-body"></div>
+        <p class="ask" id="lesson-ask"></p>
+        <div class="row">
+          <button class="btn btn-gold" id="btn-listen" type="button">▶ Nghe bài học</button>
+          <button class="btn" id="btn-done" type="button" aria-pressed="false">Đã đọc xong</button>
+        </div>
+        <p class="note" id="listen-note" hidden></p>
+      </article>
+    </section>
+
+    <section aria-labelledby="quiz-h">
+      <p class="eyebrow">Trắc nghiệm</p>
+      <h2 class="section-title" id="quiz-h">Làm bài test, nhận thẻ kết quả</h2>
+      <div class="quizzes" id="quiz-list"></div>
+    </section>
+
+    <footer>
+      <div class="links">
+        <a href="https://www.tiktok.com/@sachnhaharry" target="_blank" rel="noopener">Xem video trên TikTok</a>
+      </div>
+      <span>Các bài trắc nghiệm mang tính tham khảo để tự nhìn lại, không phải chẩn đoán tâm lý.</span>
+    </footer>
+  </main>
+
+  <!-- MÀN LÀM BÀI -->
+  <main id="view-quiz" class="wrap" hidden>
+    <button class="back" type="button" data-go="home">← Trang chủ</button>
+    <div class="progress">
+      <div class="progress-top"><span id="q-title"></span><span id="q-count"></span></div>
+      <div class="bar"><i id="q-bar"></i></div>
+    </div>
+    <h2 class="question" id="q-text"></h2>
+    <div class="options" id="q-options" role="radiogroup" aria-labelledby="q-text"></div>
+    <div class="row">
+      <button class="btn" id="q-prev" type="button">← Câu trước</button>
+    </div>
+  </main>
+
+  <!-- MÀN KẾT QUẢ -->
+  <main id="view-result" class="wrap" hidden>
+    <button class="back" type="button" data-go="home">← Trang chủ</button>
+    <div class="card" id="result-card">
+      <div class="card-head"><span>Sách nhà Harry</span><span>Kết quả của bạn</span></div>
+      <div class="card-main">
+        <div class="fig" id="r-fig" aria-hidden="true"></div>
+        <div>
+          <p class="quizname" id="r-quiz"></p>
+          <p class="tier" id="r-tier"></p>
+          <p class="score" id="r-score"></p>
+        </div>
+      </div>
+      <div class="meter"><i id="r-meter"></i></div>
+      <p id="r-desc"></p>
+      <h4>Việc nên làm</h4>
+      <ul id="r-tips"></ul>
+      <div class="card-foot"><span>Làm bài test tại <b>Sách nhà Harry</b></span><b>@sachnhaharry</b></div>
+    </div>
+    <p class="note">Chụp màn hình thẻ này để đăng story hoặc gửi bạn bè.</p>
+    <div class="care" id="r-care" hidden></div>
+    <div class="row">
+      <button class="btn btn-gold" id="r-copy" type="button">Sao chép kết quả</button>
+      <button class="btn" id="r-again" type="button">Làm lại</button>
+      <button class="btn" type="button" data-go="home">Bài test khác</button>
+    </div>
+    <textarea id="copy-fallback" aria-label="Nội dung kết quả để sao chép" hidden readonly style="width:100%;min-height:90px;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:12px;padding:10px;font:inherit"></textarea>
+    <a class="btn" href="https://www.tiktok.com/@sachnhaharry" target="_blank" rel="noopener">Xem thêm video trên TikTok</a>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(function(){
+  /* ---------- Hình người que (cùng phong cách video) ---------- */
+  function fig(pose){
+    var bg = '#000';
+    var head = '<circle cx="60" cy="30" r="21" fill="currentColor"/>';
+    var torso = '<rect x="43" y="56" width="34" height="68" rx="17" fill="currentColor"/>';
+    var legs = '<path d="M52 118 L46 186 M68 118 L74 186" stroke="currentColor" stroke-width="16" stroke-linecap="round" fill="none"/>';
+    var arms = '';
+    if (pose === 'cross') {
+      arms = '<path d="M34 76 L84 100 M86 76 L36 100" stroke="'+bg+'" stroke-width="24" stroke-linecap="round" fill="none"/>' +
+             '<path d="M34 76 L84 100 M86 76 L36 100" stroke="currentColor" stroke-width="14" stroke-linecap="round" fill="none"/>';
+    } else if (pose === 'read') {
+      arms = '<path d="M46 66 L32 100 L52 104 M74 66 L88 100 L68 104" stroke="'+bg+'" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
+             '<path d="M46 66 L32 100 L52 104 M74 66 L88 100 L68 104" stroke="currentColor" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
+             '<path d="M36 90 L60 96 L84 90 L84 116 L60 122 L36 116 Z" fill="#ffbd59"/><path d="M60 96 L60 122" stroke="'+bg+'" stroke-width="2"/>';
+    } else if (pose === 'think') {
+      arms = '<path d="M46 66 L36 118" stroke="currentColor" stroke-width="14" stroke-linecap="round" fill="none"/>' +
+             '<path d="M76 66 L92 90 L72 56" stroke="'+bg+'" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
+             '<path d="M76 66 L92 90 L72 56" stroke="currentColor" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
+             '<text x="92" y="22" font-family="Literata, Georgia, serif" font-weight="700" font-size="30" fill="#ffbd59">?</text>';
+    } else if (pose === 'rise') {
+      arms = '<path d="M46 66 L28 34 M74 66 L92 34" stroke="currentColor" stroke-width="14" stroke-linecap="round" fill="none"/>' +
+             '<circle cx="100" cy="16" r="9" fill="#ffbd59"/>';
+    } else if (pose === 'stop') {
+      arms = '<path d="M46 66 L36 118" stroke="currentColor" stroke-width="14" stroke-linecap="round" fill="none"/>' +
+             '<path d="M74 66 L100 60" stroke="currentColor" stroke-width="14" stroke-linecap="round" fill="none"/>' +
+             '<rect x="98" y="42" width="16" height="26" rx="7" fill="currentColor"/>';
+    } else {
+      arms = '<path d="M46 66 L36 118 M74 66 L84 118" stroke="currentColor" stroke-width="14" stroke-linecap="round" fill="none"/>';
+    }
+    return '<svg viewBox="0 0 120 200" width="100%" role="img" aria-hidden="true">'+legs+torso+arms+head+'</svg>';
+  }
+  function paintFigs(root){
+    (root||document).querySelectorAll('[data-fig]').forEach(function(el){ el.innerHTML = fig(el.getAttribute('data-fig')); });
+  }
+
+  /* ---------- Lưu trữ an toàn ---------- */
+  function load(k, d){ try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+  function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+  /* ---------- Bài học mỗi ngày ---------- */
+  var LESSONS = [
+    { t:'Người kỷ luật thật sự thường không khoe mình kỷ luật',
+      p:['Họ dậy sớm không phải để đăng story, mà để có một giờ yên tĩnh trước khi thế giới đòi hỏi họ điều gì. Họ làm việc khó nhất đầu tiên, khi ý chí còn đầy.',
+         'Điều đáng học nhất ở họ không nằm ở giờ thức dậy. Họ không chờ có hứng. Có hứng hay không, việc vẫn phải xong. Kỷ luật lúc đầu nặng nề, nhưng dần dần nó cho bạn quyền tự quyết về thời gian của mình.'],
+      a:'Hôm nay, việc khó nhất bạn đang né là gì? Làm nó trong 10 phút đầu tiên của buổi chiều nay.' },
+    { t:'Cái đầu lạnh bắt đầu từ 10 giây im lặng',
+      p:['Khi bị chọc giận, cơ thể phản ứng trước khi lý trí kịp lên tiếng. Tim đập nhanh, lời nói bật ra, và ta thường hối hận vì câu nói ấy hơn là vì chuyện gây ra nó.',
+         'Người có cái đầu lạnh không phải người không biết giận. Họ chỉ tạo ra một khoảng trống giữa cảm xúc và phản ứng: hít một hơi, đếm đến mười, hoặc nói "để mình nghĩ thêm rồi trả lời".'],
+      a:'Lần gần nhất bạn nói điều mình hối hận là khi nào? Nếu có 10 giây lúc đó, bạn sẽ nói gì khác?' },
+    { t:'Hãy tin vào hành động lặp lại, không phải lời hứa',
+      p:['Lời nói có thể rất đẹp trong một buổi tối. Hành động thì phải lặp lại qua nhiều tuần, nhiều tháng. Vì vậy, sự nhất quán là thước đo đáng tin nhất của một người.',
+         'Nếu ai đó nói quan tâm bạn nhưng chỉ xuất hiện khi họ cần, hãy nhìn vào khuôn mẫu, đừng nhìn vào từng lần xin lỗi. Người thật lòng không làm bạn phải đoán.'],
+      a:'Có ai trong đời bạn mà lời nói và hành động của họ không khớp nhau không?' },
+    { t:'Nói "không" không cần một bài diễn văn',
+      p:['Nhiều người mệt mỏi không phải vì làm quá nhiều việc của mình, mà vì nhận quá nhiều việc của người khác. Mỗi lời "có" miễn cưỡng là một lời "không" với chính bạn.',
+         'Lời từ chối rõ ràng và tử tế thường ngắn: "Cảm ơn bạn đã nghĩ đến mình, nhưng lần này mình không nhận được." Bạn không nợ ai một lời giải thích dài để bảo vệ thời gian của mình.'],
+      a:'Tuần này có lời đề nghị nào bạn muốn từ chối nhưng chưa dám?' },
+    { t:'Quy tắc 2 phút: bắt đầu nhỏ đến mức không thể thất bại',
+      p:['Trong cuốn Atomic Habits, James Clear gợi ý một ý rất đơn giản: thu nhỏ thói quen mới xuống còn phiên bản làm được trong 2 phút. Muốn đọc sách thì đọc một trang. Muốn tập thể dục thì chỉ cần mang giày vào.',
+         'Nghe có vẻ quá dễ, nhưng đó chính là mục đích. Bạn đang luyện thói quen có mặt mỗi ngày. Khi đã có mặt đều đặn, tăng dần mức độ sẽ dễ hơn nhiều.'],
+      a:'Thói quen bạn muốn xây là gì? Phiên bản 2 phút của nó trông ra sao?' },
+    { t:'Để ý xem ai làm bạn mệt sau mỗi lần gặp',
+      p:['Có những người, sau khi gặp, bạn thấy nhẹ nhõm và có thêm năng lượng. Có những người khiến bạn kiệt sức dù chỉ ngồi cạnh một buổi cà phê.',
+         'Bạn không cần cắt đứt ngay với ai. Nhưng hãy thành thật ghi nhận cảm giác của cơ thể mình. Nó thường biết trước khi lý trí chịu thừa nhận.'],
+      a:'Nghĩ về ba người bạn gặp nhiều nhất tuần qua. Sau mỗi lần gặp, bạn thấy thế nào?' },
+    { t:'Bạn không cần làm tất cả mọi người hài lòng',
+      p:['Cố làm vừa lòng tất cả là một cách chắc chắn để đánh mất chính mình. Luôn có người không hiểu, không thích, hoặc hiểu sai về bạn, dù bạn tốt đến đâu.',
+         'Chữa lành đôi khi bắt đầu bằng việc chấp nhận điều đó. Hãy sống đúng với giá trị của mình, tử tế với người khác, và để phần còn lại cho thời gian trả lời.'],
+      a:'Bạn đang cố làm vừa lòng ai đến mức thấy mệt?' }
+  ];
+
+  function todayKey(d){ d = d || new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  var now = new Date();
+  var dayIndex = Math.floor((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(2026,0,1)) / 864e5);
+  var lesson = LESSONS[((dayIndex % LESSONS.length) + LESSONS.length) % LESSONS.length];
+  var WEEKDAYS = ['Chủ nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'];
+
+  function renderLesson(){
+    document.getElementById('lesson-date').textContent = WEEKDAYS[now.getDay()] + ', ' + now.getDate() + '/' + (now.getMonth()+1);
+    document.getElementById('lesson-h').textContent = lesson.t;
+    document.getElementById('lesson-body').innerHTML = lesson.p.map(function(x){ return '<p>'+x+'</p>'; }).join('');
+    document.getElementById('lesson-ask').textContent = lesson.a;
+    renderStreak();
+  }
+  function renderStreak(){
+    var s = load('snh_streak', {last:null, count:0});
+    var today = todayKey();
+    var y = new Date(now); y.setDate(y.getDate()-1);
+    var alive = s.last === today || s.last === todayKey(y);
+    var count = alive ? s.count : 0;
+    document.getElementById('streak').textContent = 'Chuỗi ' + count + ' ngày';
+    var done = s.last === today;
+    var b = document.getElementById('btn-done');
+    b.setAttribute('aria-pressed', done ? 'true' : 'false');
+    b.textContent = done ? '✓ Hôm nay đã xong' : 'Đã đọc xong';
+  }
+  function markDone(){
+    var s = load('snh_streak', {last:null, count:0});
+    var today = todayKey();
+    if (s.last === today) return;
+    var y = new Date(now); y.setDate(y.getDate()-1);
+    s.count = (s.last === todayKey(y)) ? s.count + 1 : 1;
+    s.last = today;
+    save('snh_streak', s);
+    renderStreak();
+    toast('Tuyệt! Hẹn bạn ngày mai.');
+  }
+
+  /* Nghe bằng giọng đọc của máy */
+  var speaking = false;
+  function listen(){
+    var btn = document.getElementById('btn-listen');
+    var note = document.getElementById('listen-note');
+    var synth = window.speechSynthesis;
+    if (!synth || typeof SpeechSynthesisUtterance === 'undefined') {
+      note.hidden = false; note.textContent = 'Trình duyệt này chưa hỗ trợ đọc to. Bạn đọc bài bên trên nhé.'; return;
+    }
+    if (speaking) { synth.cancel(); speaking = false; btn.textContent = '▶ Nghe bài học'; return; }
+    var voices = synth.getVoices() || [];
+    var vi = voices.filter(function(v){ return /^vi/i.test(v.lang); })[0];
+    if (!vi) {
+      note.hidden = false;
+      note.textContent = 'Máy của bạn chưa có giọng đọc tiếng Việt. Bạn có thể cài thêm giọng tiếng Việt trong cài đặt máy, hoặc đọc bài bên trên.';
+      return;
+    }
+    note.hidden = true;
+    var text = lesson.t + '. ' + lesson.p.join(' ') + ' Câu hỏi cho bạn hôm nay: ' + lesson.a;
+    var u = new SpeechSynthesisUtterance(text);
+    u.voice = vi; u.lang = vi.lang; u.rate = 0.92;
+    u.onend = function(){ speaking = false; btn.textContent = '▶ Nghe bài học'; markDone(); };
+    u.onerror = function(){ speaking = false; btn.textContent = '▶ Nghe bài học'; };
+    synth.cancel(); synth.speak(u);
+    speaking = true; btn.textContent = '■ Dừng';
+  }
+  if (window.speechSynthesis) { try{ window.speechSynthesis.getVoices(); }catch(e){} }
+
+  /* ---------- Trắc nghiệm ---------- */
+  var FREQ = [{t:'Không bao giờ',v:0},{t:'Thỉnh thoảng',v:1},{t:'Thường xuyên',v:2}];
+  var AGREE = [{t:'Đúng với tôi',v:2},{t:'Lúc có lúc không',v:1},{t:'Không đúng với tôi',v:0}];
+
+  var QUIZZES = {
+    thaotung: {
+      title:'Bạn có đang bị thao túng tâm lý?',
+      short:'Thao túng tâm lý',
+      lead:'10 câu · khoảng 2 phút · nghĩ về một mối quan hệ cụ thể',
+      fig:'think', opts:FREQ,
+      intro:'Nghĩ về một người cụ thể (người yêu, bạn bè, sếp, người thân) khi trả lời.',
+      qs:[
+        'Bạn hay tự hỏi có phải mình nhớ sai, dù trước đó bạn khá chắc chắn.',
+        'Bạn xin lỗi cả khi không rõ mình sai ở đâu.',
+        'Khi bạn bày tỏ cảm xúc, người đó nói bạn "nhạy cảm quá" hoặc "làm quá lên".',
+        'Bạn phải cân nhắc từng lời trước khi nói chuyện với người đó.',
+        'Người đó rất ngọt ngào, rồi lạnh nhạt đột ngột mà không giải thích.',
+        'Bạn ít gặp bạn bè, gia đình hơn vì người đó không thích.',
+        'Người đó nhắc lại lỗi cũ của bạn để thắng trong tranh cãi.',
+        'Bạn thấy nhẹ nhõm khi người đó không có mặt.',
+        'Người đó hứa nhiều nhưng ít làm, và cuối cùng bạn lại là người bị trách.',
+        'Bạn không còn chắc mình muốn gì nếu chưa hỏi ý người đó.'
+      ],
+      tiers:[
+        {max:5, title:'Vùng an toàn', fig:'cross',
+         d:'Mối quan hệ này có vẻ lành mạnh. Bạn vẫn tin vào cảm nhận của mình và được tôn trọng khi bày tỏ cảm xúc.',
+         tips:['Giữ thói quen nói thẳng khi có điều không vui.','Để ý nếu các dấu hiệu trên bắt đầu xuất hiện thường hơn.','Chia sẻ bài test cho một người bạn có thể đang cần.']},
+        {max:12, title:'Có tín hiệu cần để ý', fig:'think',
+         d:'Có vài khuôn mẫu khiến bạn nghi ngờ bản thân hoặc phải dè chừng. Chưa hẳn là thao túng, nhưng đáng để nhìn kỹ hơn.',
+         tips:['Ghi lại các lần bạn thấy mình bị nói là "nhớ sai" hay "làm quá".','Kể chuyện với một người bạn tin tưởng để có góc nhìn từ bên ngoài.','Thử nói rõ một giới hạn nhỏ và xem người đó phản ứng thế nào.']},
+        {max:20, title:'Nhiều dấu hiệu đáng lo', fig:'stop',
+         d:'Nhiều câu trả lời cho thấy bạn đang thường xuyên nghi ngờ chính mình và thu hẹp cuộc sống quanh người đó. Cảm giác của bạn là thật và đáng được coi trọng.',
+         tips:['Kết nối lại với bạn bè, gia đình. Đừng đối diện chuyện này một mình.','Ghi chép lại sự việc để giữ vững trí nhớ của mình.','Cân nhắc nói chuyện với chuyên gia tâm lý.'],
+         care:'Nếu bạn cảm thấy không an toàn hoặc bị đe dọa, hãy ưu tiên sự an toàn của mình: tìm đến người bạn tin tưởng, gia đình, hoặc liên hệ cơ quan chức năng ở nơi bạn sống.'}
+      ]
+    },
+    kyluat: {
+      title:'Mức độ kỷ luật của bạn đến đâu?',
+      short:'Mức độ kỷ luật',
+      lead:'10 câu · khoảng 2 phút',
+      fig:'rise', opts:AGREE,
+      intro:'Trả lời theo những gì bạn thật sự làm trong 2 tuần qua.',
+      qs:[
+        'Tôi thức dậy vào một giờ gần như cố định mỗi ngày.',
+        'Tôi làm việc khó nhất trước khi mở mạng xã hội.',
+        'Tôi làm xong việc đã hứa với chính mình, kể cả khi không có hứng.',
+        'Tôi biết từ chối những lời mời làm mình chệch kế hoạch.',
+        'Tôi lên kế hoạch cho ngày mai trước khi đi ngủ.',
+        'Khi lỡ bỏ một ngày, tôi quay lại ngay hôm sau thay vì bỏ hẳn.',
+        'Tôi có thể tập trung 45 phút mà không cầm điện thoại.',
+        'Tôi theo dõi tiến độ của mình bằng sổ, ứng dụng hoặc bảng.',
+        'Tôi ít khi mua sắm theo cảm hứng nhất thời.',
+        'Mỗi tối tôi dành vài phút nhìn lại ngày của mình.'
+      ],
+      tiers:[
+        {max:6, title:'Người đang khởi động', fig:'think',
+         d:'Bạn đang ở điểm bắt đầu, và đó là điều bình thường. Kỷ luật được xây dần từ những việc rất nhỏ, không phải từ quyết tâm lớn trong một đêm.',
+         tips:['Chọn đúng 1 thói quen và làm phiên bản 2 phút của nó mỗi ngày.','Để điện thoại ngoài phòng khi làm việc 25 phút.','Đặt giờ thức dậy cố định trong 7 ngày tới.']},
+        {max:13, title:'Người đang tăng tốc', fig:'rise',
+         d:'Bạn đã có nền móng, chỉ còn thiếu sự đều đặn. Những ngày thiếu hứng là lúc phân biệt người giữ được thói quen và người bỏ cuộc.',
+         tips:['Làm việc khó nhất trong giờ đầu tiên của ngày.','Không bỏ lỡ 2 ngày liên tiếp.','Viết kế hoạch 3 việc chính cho ngày mai trước khi ngủ.']},
+        {max:20, title:'Người kỷ luật âm thầm', fig:'cross',
+         d:'Bạn làm điều cần làm mà không cần ai nhắc hay khen. Kỷ luật đã thành một phần con người bạn.',
+         tips:['Chọn một thử thách mới đủ khó để tiếp tục phát triển.','Nghỉ ngơi có chủ đích để tránh kiệt sức.','Chia sẻ cách làm của bạn cho người đang bắt đầu.']}
+      ]
+    }
+  };
+  var ORDER = ['thaotung','kyluat'];
+
+  function renderQuizList(){
+    var list = document.getElementById('quiz-list');
+    list.innerHTML = ORDER.map(function(id){
+      var q = QUIZZES[id];
+      return '<button class="qcard" type="button" data-quiz="'+id+'">' +
+        '<div class="fig" data-fig="'+q.fig+'" aria-hidden="true"></div>' +
+        '<div><h3>'+q.title+'</h3><span>'+q.lead+'</span><br><span class="go">Bắt đầu →</span></div></button>';
+    }).join('');
+    paintFigs(list);
+  }
+
+  var state = { id:null, i:0, ans:[] };
+  function startQuiz(id){
+    state = { id:id, i:0, ans:new Array(QUIZZES[id].qs.length).fill(null) };
+    show('quiz'); renderQuestion();
+  }
+  function renderQuestion(){
+    var q = QUIZZES[state.id], n = q.qs.length, i = state.i;
+    document.getElementById('q-title').textContent = q.short;
+    document.getElementById('q-count').textContent = 'Câu ' + (i+1) + '/' + n;
+    document.getElementById('q-bar').style.width = ((i)/n*100) + '%';
+    document.getElementById('q-text').textContent = q.qs[i];
+    var box = document.getElementById('q-options');
+    box.innerHTML = q.opts.map(function(o, k){
+      var on = state.ans[i] === o.v;
+      return '<button class="opt" type="button" role="radio" id="opt-'+k+'" aria-checked="'+(on?'true':'false')+'" data-v="'+o.v+'">'+o.t+'</button>';
+    }).join('');
+    document.getElementById('q-prev').hidden = i === 0;
+    var first = box.querySelector('.opt'); if (first) first.focus({preventScroll:true});
+  }
+  function answer(v){
+    state.ans[state.i] = v;
+    var q = QUIZZES[state.id];
+    renderQuestion();
+    setTimeout(function(){
+      if (state.i < q.qs.length - 1) { state.i++; renderQuestion(); }
+      else { finish(); }
+    }, 180);
+  }
+  function finish(){
+    var q = QUIZZES[state.id];
+    var score = state.ans.reduce(function(a,b){ return a + (b||0); }, 0);
+    var max = q.qs.length * 2;
+    var tier = q.tiers.filter(function(t){ return score <= t.max; })[0] || q.tiers[q.tiers.length-1];
+    document.getElementById('r-quiz').textContent = q.title;
+    document.getElementById('r-tier').textContent = tier.title;
+    document.getElementById('r-score').textContent = 'Điểm: ' + score + '/' + max;
+    document.getElementById('r-meter').style.width = (score/max*100) + '%';
+    document.getElementById('r-desc').textContent = tier.d;
+    document.getElementById('r-tips').innerHTML = tier.tips.map(function(t){ return '<li>'+t+'</li>'; }).join('');
+    var f = document.getElementById('r-fig'); f.innerHTML = fig(tier.fig);
+    var care = document.getElementById('r-care');
+    if (tier.care) { care.hidden = false; care.textContent = tier.care; } else { care.hidden = true; }
+    document.getElementById('copy-fallback').hidden = true;
+    state.result = { quiz:q.title, tier:tier.title, score:score, max:max };
+    var hist = load('snh_results', {}); hist[state.id] = state.result; save('snh_results', hist);
+    show('result');
+  }
+  function copyResult(){
+    var r = state.result; if (!r) return;
+    var text = 'Mình vừa làm bài test "' + r.quiz + '" của Sách nhà Harry: ' + r.tier + ' (' + r.score + '/' + r.max + '). Còn bạn thì sao? Theo dõi @sachnhaharry trên TikTok để làm thử nhé.';
+    var fb = document.getElementById('copy-fallback');
+    function fallback(){ fb.hidden = false; fb.value = text; fb.focus(); fb.select(); toast('Chọn và sao chép đoạn chữ bên dưới'); }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function(){ toast('Đã sao chép kết quả'); }, fallback);
+      } else { fallback(); }
+    } catch(e){ fallback(); }
+  }
+
+  /* ---------- Điều hướng ---------- */
+  var VIEWS = ['home','quiz','result'];
+  function show(v){
+    VIEWS.forEach(function(x){ document.getElementById('view-'+x).hidden = (x !== v); });
+    window.scrollTo(0,0);
+  }
+  function route(){
+    var h = (location.hash || '').replace('#','');
+    if (QUIZZES[h]) { startQuiz(h); } else { show('home'); }
+  }
+
+  var toastTimer;
+  function toast(msg){
+    var t = document.getElementById('toast'); t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(function(){ t.hidden = true; }, 2200);
+  }
+
+  document.addEventListener('click', function(e){
+    var q = e.target.closest('[data-quiz]'); if (q) { startQuiz(q.getAttribute('data-quiz')); return; }
+    var o = e.target.closest('.opt'); if (o) { answer(Number(o.getAttribute('data-v'))); return; }
+    var g = e.target.closest('[data-go]'); if (g) { if (window.speechSynthesis) window.speechSynthesis.cancel(); show(g.getAttribute('data-go')); return; }
+  });
+  document.getElementById('q-prev').addEventListener('click', function(){ if (state.i > 0) { state.i--; renderQuestion(); } });
+  document.getElementById('r-again').addEventListener('click', function(){ startQuiz(state.id); });
+  document.getElementById('r-copy').addEventListener('click', copyResult);
+  document.getElementById('btn-listen').addEventListener('click', listen);
+  document.getElementById('btn-done').addEventListener('click', markDone);
+  document.getElementById('view-home').addEventListener('click', function(e){
+    if (e.target.closest('.brand')) show('home');
+  });
+  window.addEventListener('hashchange', route);
+
+  paintFigs(); renderLesson(); renderQuizList(); route();
+})();
+</script>
